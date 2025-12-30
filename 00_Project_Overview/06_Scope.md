@@ -85,7 +85,7 @@ The following capabilities are included in the ISBUSHKA system.
 
 ### External Calendar Sync (One-Way)
 
-- One-way creation of Google Calendar events based on appointment data
+- One-way creation of Google Calendar events based on appointment data (create/update/delete)
 - Source of truth remains the system data (Google Sheets / AppSheet)
 - Calendar is used as a convenience view for schedule consumption
 

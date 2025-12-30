@@ -3,25 +3,23 @@
 ## Purpose of This Document
 
 This document defines the high-level requirements backlog for the ISBUSHKA project.
-It translates discovery outcomes into structured Epics and Features that
-describe *what* the system must support, without detailing implementation.
+It translates discovery outcomes into structured **Epics and Features** and
+explicitly captures **functional dependencies** between them.
 
-The backlog is used to:
-- align requirements with business objectives
-- support scope control and prioritization
-- serve as a foundation for detailed requirements and use cases
+The backlog is designed to:
+- reflect business priorities
+- make functional dependencies explicit
+- support realistic delivery planning
+- serve as a foundation for detailed requirements, use cases, and process models
 
 ---
 
-## Backlog Structure
+## Backlog Design Principles
 
-- **Epic** — a high-level business capability
-- **Feature** — a specific system capability within an epic
-
-Each epic and feature is traceable to:
-- Business Objectives
-- Personas
-- Scope definition
+- Business priority ≠ implementation sequence
+- Functional dependencies are explicitly documented
+- Reference data and foundational capabilities are identified
+- Epics describe **business capabilities**, not UI screens
 
 ---
 
@@ -59,13 +57,19 @@ Support creation and maintenance of client information used across the system.
 
 **Description**  
 Support scheduling and tracking of appointments agreed with masters.
+Appointment management represents the **core operational flow** of the system.
+
+### Functional Dependencies
+- Depends on **Service Classification (E-03)** as reference data
+- Depends on **Client Management (E-01)** for client identification
+- Supports downstream processes (financial operations, reporting, calendar sync)
 
 ### Features
 
 | Feature ID | Feature Name | Description | Personas |
 |-----------|--------------|-------------|----------|
 | F-02.1 | Create appointment | Create appointment after agreement with master | Administrator |
-| F-02.2 | Assign service | Assign service as procedure type | Administrator |
+| F-02.2 | Assign service | Assign service as procedure type (classification) | Administrator |
 | F-02.3 | Specify duration | Define appointment-specific duration | Administrator |
 | F-02.4 | Assign master | Associate appointment with a master | Administrator |
 | F-02.5 | Update appointment | Modify date, time, or master | Administrator |
@@ -77,6 +81,12 @@ Support scheduling and tracking of appointments agreed with masters.
 
 **Description**  
 Maintain a controlled list of service types used for classification and reporting.
+Services do **not** define fixed price or duration.
+
+### Dependency Type
+- **Foundational / Reference Data**
+
+This epic must exist before or alongside appointment creation.
 
 ### Features
 
@@ -85,14 +95,17 @@ Maintain a controlled list of service types used for classification and reportin
 | F-03.1 | Manage services | Create and maintain service types | Owner / Administrator |
 | F-03.2 | Use services in appointments | Reference services during appointment creation | Administrator |
 
-> Services do not include price or duration.
-
 ---
 
 ## E-04. Financial Operations
 
 **Description**  
 Support recording and tracking of financial transactions.
+Financial data represents the **final agreed outcome** of completed appointments.
+
+### Functional Dependencies
+- Depends on **Appointment Management (E-02)** for operational context
+- Financial operations may exist only for completed appointments
 
 ### Features
 
@@ -108,7 +121,12 @@ Support recording and tracking of financial transactions.
 ## E-05. Reporting and Analytics
 
 **Description**  
-Provide read-only visibility into salon performance.
+Provide read-only visibility into salon performance using aggregated data.
+
+### Functional Dependencies
+- Depends on **Appointment Management (E-02)**
+- Depends on **Financial Operations (E-04)**
+- Depends on data accuracy and consistency
 
 ### Features
 
@@ -124,7 +142,12 @@ Provide read-only visibility into salon performance.
 ## E-06. Access Control and Roles
 
 **Description**  
-Ensure data access is restricted based on user role.
+Ensure data access and visibility are restricted based on user role.
+
+### Dependency Type
+- **Cross-cutting / Foundational**
+
+Applies to all epics.
 
 ### Features
 
@@ -141,6 +164,10 @@ Ensure data access is restricted based on user role.
 **Description**  
 Provide one-way synchronization from system appointments to Google Calendar.
 
+### Functional Dependencies
+- Depends on **Appointment Management (E-02)**
+- Uses appointment data as source of truth
+
 ### Features
 
 | Feature ID | Feature Name | Description | Personas |
@@ -152,13 +179,27 @@ Provide one-way synchronization from system appointments to Google Calendar.
 
 ---
 
+## Functional Dependency Matrix
+
+| Dependent Epic | Depends On | Dependency Type |
+|---------------|------------|-----------------|
+| E-02 Appointment Management | E-01 Client Management | Reference data |
+| E-02 Appointment Management | E-03 Service Classification | Reference data |
+| E-04 Financial Operations | E-02 Appointment Management | Operational |
+| E-05 Reporting and Analytics | E-02, E-04 | Aggregated data |
+| E-07 External Calendar Sync | E-02 Appointment Management | Event source |
+| E-06 Access Control | All epics | Cross-cutting |
+
+---
+
 ## Prioritization Notes
 
-- Appointment management and financial operations are highest priority
-- Reporting is dependent on data quality and structure
-- Calendar sync is supportive, not core
+- Appointment Management and Financial Operations represent the **core business flow**
+- Service Classification is foundational and required for operational correctness
+- Reporting depends on data availability and accuracy
+- Calendar synchronization is supportive, not business-critical
 
-Detailed prioritization is defined in `10_Prioritization_Model.md`.
+Business priority does not imply delivery order.
 
 ---
 
@@ -174,8 +215,8 @@ This backlog is traceable to:
 
 ## Next Steps
 
-This high-level backlog will be used as a basis for:
-- detailed requirements
-- use case specifications
+This high-level backlog will be used as input for:
+- detailed functional requirements
+- use case modeling (Actors and Use Cases)
 - process modeling (BPMN)
-- data model refinement
+- data model refinement (ERD)

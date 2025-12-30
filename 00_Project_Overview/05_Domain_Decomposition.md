@@ -67,21 +67,23 @@ Manages information related to salon clients.
 ### 2. Service Catalog
 
 **Description**  
-Defines the list of services provided by the salon.
+Represents the list of service types offered by the salon. Services define
+*what kind of procedure is performed*, but do not contain fixed duration
+or pricing.
 
 **Key Concepts**
-- Service
-- Service duration
-- Service price
+- Service (type of procedure)
+- Service category (optional)
 
 **Responsibilities**
-- Maintain available services
-- Define default duration and pricing
-- Serve as a reference for appointments and calculations
+- Maintain the list of available service types
+- Serve as a semantic reference for appointments
+- Support reporting and analytics by service type
 
 **Notes**
-- Services are reusable across appointments
-- Pricing logic may evolve in the future
+- Services do NOT define fixed duration or price
+- Duration and price are determined individually by the master
+- Services act as classification rather than pricing entities
 
 ---
 

@@ -71,6 +71,7 @@ Dependencies represent external factors that the system relies on.
 | D-03 | Google account access | Operational | User authentication | Low |
 | D-04 | Business owner decisions | Organizational | Scope and priority approval | Medium |
 | D-05 | User availability | Operational | Feedback and validation | Medium |
+| D-06 | Google Calendar | Technical | One-way event creation | Medium
 
 ---
 

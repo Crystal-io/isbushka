@@ -2,12 +2,9 @@
 
 ## Purpose of This Document
 
-This document defines the system actors and high-level use cases for the
-ISBUSHKA project.
-
-The Actor & Use Case Model describes **who** interacts with the system and
-**for what business purpose**, without separating technical details or UI
-implementation.
+This document defines system actors and high-level use cases for the ISBUSHKA project.
+It formalizes **who** interacts with the system and **for what business purpose**,
+without describing UI or implementation.
 
 The model is intentionally minimal and reflects the real operational logic
 of a small service business.
@@ -27,13 +24,14 @@ use case** if they serve the same business goal.
 ## System Boundary
 
 The ISBUSHKA system includes:
+- client data management
 - appointment management
-- financial recording
+- financial operations recording
 - reporting
 - one-way calendar synchronization
 
-Configuration and technical setup are performed outside of system use cases
-and are considered operational maintenance.
+External systems (e.g., Google Calendar) are outside the system boundary
+and consume derived data only.
 
 ---
 
@@ -41,10 +39,10 @@ and are considered operational maintenance.
 
 | Actor ID | Actor Name | Description |
 |--------|------------|-------------|
-| A-01 | Owner | Business owner with analytical and supervisory access |
-| A-02 | Administrator | Primary operational system user |
+| A-01 | Owner | Business owner with read-only analytical access and supervisory visibility |
+| A-02 | Administrator | Primary operational user (appointments, finance, reference data) |
 | A-03 | Master | Service provider with read-only schedule access |
-| A-04 | External Calendar | External system consuming appointment data |
+| A-04 | External Calendar | External consumer of appointment schedule data (derived) |
 
 ---
 
@@ -52,40 +50,34 @@ and are considered operational maintenance.
 
 ### A-01. Owner
 - Review financial and operational reports
-- Monitor business performance
-
----
+- Monitor performance indicators
 
 ### A-02. Administrator
-- Manage clients and appointments
-- Record payments and expenses
-- Ensure operational data correctness
-
----
+- Maintain clients
+- Create and manage appointments (after agreement with master)
+- Record income/expense operations
+- Ensure correctness of operational and financial data
 
 ### A-03. Master
 - View personal schedule
-- Confirm appointment details offline
-
----
+- Confirm appointment details offline (outside the system)
 
 ### A-04. External Calendar
-- Display appointment schedule
-- Consume derived appointment data
+- Display derived appointment schedule data (read-only consumer)
 
 ---
 
 ## Use Case Overview
 
-| Use Case ID | Use Case Name | Primary Actor | Related Epic |
-|-----------|---------------|---------------|--------------|
-| UC-01 | Manage Clients | Administrator | E-01 |
-| UC-02 | Manage Service Classification | Administrator | E-03 |
-| UC-03 | Manage Appointments | Administrator | E-02 |
-| UC-04 | Record Payment / Expense | Administrator | E-04 |
-| UC-05 | View Reports | Owner | E-05 |
-| UC-06 | View Schedule | Master | E-02 |
-| UC-07 | Synchronize Calendar Event | External Calendar | E-07 |
+| Use Case ID | Use Case Name | Primary Actor | Notes |
+|-----------|---------------|---------------|------|
+| UC-01 | Manage Clients | Administrator | Create/update client profiles used across operations |
+| UC-02 | Manage Service Classification | Administrator | Maintain list of service types (no fixed price/duration) |
+| UC-03 | Manage Appointments | Administrator | Create/update/cancel appointments; duration specified per appointment |
+| UC-04 | Record Payment / Expense | Administrator | Multiple entry points; optional linking; appointment completion automation |
+| UC-05 | View Reports | Owner | Read-only analytics and summaries |
+| UC-06 | View Schedule | Master | Read-only personal schedule |
+| UC-07 | Synchronize Calendar Event (One-Way) | External Calendar | System pushes schedule changes to calendar |
 
 ---
 
@@ -98,7 +90,7 @@ and are considered operational maintenance.
 
 **Brief Description**  
 The administrator creates, updates, and reviews client profiles that are used
-for appointments and financial records.
+for appointments and (optional) financial linking.
 
 ---
 
@@ -108,8 +100,8 @@ for appointments and financial records.
 **Goal:** Maintain service types for classification and reporting
 
 **Brief Description**  
-The administrator manages the list of service types used to classify
-appointments. Services do not define fixed price or duration.
+The administrator manages the list of service types used to classify appointments.
+Services do not define fixed price or duration.
 
 ---
 
@@ -119,8 +111,8 @@ appointments. Services do not define fixed price or duration.
 **Goal:** Register and maintain agreed appointments
 
 **Brief Description**  
-The administrator creates, updates, or cancels appointments after agreement
-with the master. For each appointment, the administrator specifies:
+The administrator creates, updates, or cancels appointments after agreement with the master.
+For each appointment the administrator specifies:
 - client
 - service (classification)
 - master
@@ -132,7 +124,7 @@ with the master. For each appointment, the administrator specifies:
 - Cancel appointment
 
 **Notes**
-- Appointments are created only after agreement with the master
+- Appointment is created only after agreement with the master
 - Appointment price is not defined at this stage
 
 ---
@@ -140,15 +132,43 @@ with the master. For each appointment, the administrator specifies:
 ### UC-04. Record Payment / Expense
 
 **Primary Actor:** Administrator  
-**Goal:** Record financial outcome of operations
+**Goal:** Record financial operations (income and expenses) with correct linking and automation
 
 **Brief Description**  
-The administrator records income or expense operations.
-Income records include the final agreed price and may be linked
-to a completed appointment.
+The administrator records financial operations. The system supports multiple creation
+scenarios and entry points:
+- **context-driven income** created from an appointment (prefilled context)
+- **standalone financial operation** (income or expense) created from a dedicated form
+- optional manual linking to client and/or appointment
+
+**Scenarios**
+
+**Scenario 1 — Income created from Appointment (Context-Driven)**  
+- Administrator initiates payment creation from an appointment
+- System pre-fills client and appointment context
+- Administrator enters the final agreed amount and confirms payment
+
+**Scenario 2 — Standalone Financial Operation Form**
+
+2A) **Expense without appointment / client**  
+- Administrator records an expense not linked to any client or appointment  
+  (e.g., materials, supplies, equipment)
+
+2B) **Income without appointment**  
+- Administrator records income that is not related to an appointment  
+  (e.g., product sale, other income)
+
+2C) **Manual linking (optional)**  
+- Administrator may optionally select client and/or appointment for the operation  
+- If appointment is selected, the operation is linked to that appointment
+
+**Rules and Notes**
+- Financial operations may exist without client and appointment
+- Linking to appointment is optional and used when operationally meaningful
+- Appointment price is represented by the final agreed amount recorded in the linked income operation
 
 **Postconditions**
-- When a payment is recorded and linked to an appointment,
+- If an **income** operation is created and linked to an appointment,
   the appointment status is automatically set to **Completed**
 
 ---
@@ -159,8 +179,7 @@ to a completed appointment.
 **Goal:** Review business performance
 
 **Brief Description**  
-The owner views read-only reports and summaries generated from
-operational and financial data.
+The owner views read-only reports and summaries based on operational and financial data.
 
 ---
 
@@ -171,29 +190,27 @@ operational and financial data.
 
 **Brief Description**  
 The master views scheduled appointments without editing capabilities.
-Schedule data is provided for informational purposes only.
 
 ---
 
-### UC-07. Synchronize Calendar Event
+### UC-07. Synchronize Calendar Event (One-Way)
 
 **Primary Actor:** External Calendar  
 **Goal:** Display appointment schedule externally
 
 **Brief Description**  
-The system creates, updates, or deletes calendar events based on
-appointment lifecycle changes.
+The system creates, updates, or deletes calendar events based on appointment lifecycle changes.
 
 **Notes**
 - Synchronization is one-way: system → calendar
-- Calendar data is derived and not authoritative
+- Calendar data is derived and not authoritative (SSOT remains in system data)
 
 ---
 
 ## Use Case Relationships (Conceptual)
 
 - UC-03 Manage Appointments → UC-07 Synchronize Calendar Event
-- UC-04 Record Payment → automatic appointment completion
+- UC-04 Record Payment / Expense → (conditional) automatic appointment completion
 - UC-03 and UC-04 provide data for UC-05 View Reports
 
 ---
@@ -205,20 +222,12 @@ This use case model is traceable to:
 - Personas and User Goals (`08_Personas_and_User_Goals.md`)
 - Scope definition (`06_Scope.md`)
 - Domain Decomposition (`05_Domain_Decomposition.md`)
+- Data sources and ownership (`14_Data_Sources_and_Ownership.md`)
 
 ---
 
 ## Design Notes
 
-- The model intentionally avoids technical configuration use cases
-- Business flows are preferred over CRUD-level granularity
-- Automation is represented as system behavior, not user actions
-
----
-
-## Next Steps
-
-This model serves as a foundation for:
-- detailed use case specifications
-- BPMN process modeling
-- functional requirements definition
+- The model avoids CRUD-level granularity and focuses on business goals
+- Automation is represented as system behavior (postconditions), not as separate use cases
+- Technical configuration is treated as operational maintenance outside of use case scope

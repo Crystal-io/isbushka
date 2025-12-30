@@ -247,3 +247,64 @@ This domain decomposition directly informs:
 - The domain model is intentionally simple and modular
 - Each domain area can evolve independently
 - The decomposition supports future scaling without redesign
+
+
+
+---
+
+## Domain Clarification v2: Service, Duration, and Pricing Model
+
+### Context
+
+During further discovery and domain analysis, it was clarified that
+ISBUSHKA operates with a highly individualized service delivery model.
+
+Service duration and pricing are not fixed attributes and depend on
+the master’s professional assessment and agreement with the client.
+
+This clarification refines the initial domain assumptions and updates
+the conceptual model accordingly.
+
+---
+
+### Updated Domain Principles
+
+- Service represents a **type of procedure**, not a pricing unit
+- Duration is defined **per appointment**, not per service
+- Price is agreed individually and recorded **only at payment creation**
+- The master is the primary source of truth for duration and price
+
+---
+
+### Clarified Domain Responsibilities
+
+#### Service (Revised)
+
+- Defines the type of procedure
+- Used for classification and reporting
+- Does **not** store price or duration
+
+#### Appointment (Revised)
+
+- Created only after agreement with the master
+- Stores appointment-specific duration
+- May exist without a finalized price
+
+#### Financial Operation (Revised)
+
+- Records the final agreed price
+- Represents the monetary outcome of a completed appointment
+- Is the only source of truth for service price
+
+---
+
+### Impact on System Design
+
+This clarification impacts:
+- data model (ERD)
+- business rules
+- UI behavior during appointment creation
+- financial calculations and reporting
+
+These impacts will be addressed in subsequent documentation.
+

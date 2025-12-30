@@ -5,13 +5,12 @@
 This document defines the system actors and high-level use cases for the
 ISBUSHKA project.
 
-The Actor & Use Case Model:
-- formalizes system interactions
-- bridges requirements backlog and detailed specifications
-- serves as a foundation for BPMN and functional requirements
-- clarifies system boundaries and responsibilities
+The Actor & Use Case Model describes **who** interacts with the system and
+**for what business purpose**, without separating technical details or UI
+implementation.
 
-This document intentionally avoids UI and implementation details.
+The model is intentionally minimal and reflects the real operational logic
+of a small service business.
 
 ---
 
@@ -20,7 +19,8 @@ This document intentionally avoids UI and implementation details.
 - **Actor** — a role that interacts with the system
 - **Use Case** — a goal-oriented interaction between an actor and the system
 
-Actors are derived from personas and stakeholders defined during discovery.
+Create, update, and cancel actions are treated as **scenarios within a single
+use case** if they serve the same business goal.
 
 ---
 
@@ -32,8 +32,8 @@ The ISBUSHKA system includes:
 - reporting
 - one-way calendar synchronization
 
-External systems (e.g. Google Calendar) are outside the system boundary
-and consume derived data only.
+Configuration and technical setup are performed outside of system use cases
+and are considered operational maintenance.
 
 ---
 
@@ -41,61 +41,37 @@ and consume derived data only.
 
 | Actor ID | Actor Name | Description |
 |--------|------------|-------------|
-| A-01 | Owner | Strategic system user with full visibility |
+| A-01 | Owner | Business owner with analytical and supervisory access |
 | A-02 | Administrator | Primary operational system user |
-| A-03 | Master | Service provider with limited access |
-| A-04 | Analyst / Maintainer | System configuration and support role |
-| A-05 | External Calendar | External system consuming schedule data |
+| A-03 | Master | Service provider with read-only schedule access |
+| A-04 | External Calendar | External system consuming appointment data |
 
 ---
 
 ## Actor Responsibilities
 
 ### A-01. Owner
-
-**Responsibilities**
-- Review financial performance
-- Monitor operational indicators
-- Manage high-level configuration
-- Access reports
+- Review financial and operational reports
+- Monitor business performance
 
 ---
 
 ### A-02. Administrator
-
-**Responsibilities**
-- Create and manage appointments
-- Record financial operations
-- Maintain reference data
-- Ensure data correctness
+- Manage clients and appointments
+- Record payments and expenses
+- Ensure operational data correctness
 
 ---
 
 ### A-03. Master
-
-**Responsibilities**
 - View personal schedule
-- Confirm appointment details
-- Communicate changes to administrator
+- Confirm appointment details offline
 
 ---
 
-### A-04. Analyst / Maintainer
-
-**Responsibilities**
-- Maintain system configuration
-- Update business rules
-- Ensure data consistency
-- Support system evolution
-
----
-
-### A-05. External Calendar
-
-**Responsibilities**
-- Receive appointment data
-- Display schedule information
-- Act as a read-only consumer
+### A-04. External Calendar
+- Display appointment schedule
+- Consume derived appointment data
 
 ---
 
@@ -105,15 +81,11 @@ and consume derived data only.
 |-----------|---------------|---------------|--------------|
 | UC-01 | Manage Clients | Administrator | E-01 |
 | UC-02 | Manage Service Classification | Administrator | E-03 |
-| UC-03 | Create Appointment | Administrator | E-02 |
-| UC-04 | Update Appointment | Administrator | E-02 |
-| UC-05 | Complete Appointment | Administrator | E-02 |
-| UC-06 | Record Financial Operation | Administrator | E-04 |
-| UC-07 | View Reports | Owner | E-05 |
-| UC-08 | View Schedule | Master | E-02 |
-| UC-09 | Synchronize Calendar Event | External Calendar | E-07 |
-| UC-10 | Manage Access and Roles | Owner | E-06 |
-| UC-11 | Maintain System Configuration | Analyst / Maintainer | Cross-cutting |
+| UC-03 | Manage Appointments | Administrator | E-02 |
+| UC-04 | Record Payment / Expense | Administrator | E-04 |
+| UC-05 | View Reports | Owner | E-05 |
+| UC-06 | View Schedule | Master | E-02 |
+| UC-07 | Synchronize Calendar Event | External Calendar | E-07 |
 
 ---
 
@@ -121,74 +93,70 @@ and consume derived data only.
 
 ### UC-01. Manage Clients
 
-**Primary Actor**: Administrator  
-**Goal**: Maintain accurate client information
+**Primary Actor:** Administrator  
+**Goal:** Maintain accurate client information
 
 **Brief Description**  
-The administrator creates, updates, and reviews client profiles
-used across appointments and financial operations.
+The administrator creates, updates, and reviews client profiles that are used
+for appointments and financial records.
 
 ---
 
 ### UC-02. Manage Service Classification
 
-**Primary Actor**: Administrator  
-**Goal**: Maintain service types for classification and reporting
+**Primary Actor:** Administrator  
+**Goal:** Maintain service types for classification and reporting
 
 **Brief Description**  
-The administrator manages the list of service types without defining
-price or duration.
+The administrator manages the list of service types used to classify
+appointments. Services do not define fixed price or duration.
 
 ---
 
-### UC-03. Create Appointment
+### UC-03. Manage Appointments
 
-**Primary Actor**: Administrator  
-**Goal**: Register an agreed appointment in the system
+**Primary Actor:** Administrator  
+**Goal:** Register and maintain agreed appointments
 
 **Brief Description**  
-An appointment is created only after agreement with the master.
-The administrator specifies client, service, master, and duration.
+The administrator creates, updates, or cancels appointments after agreement
+with the master. For each appointment, the administrator specifies:
+- client
+- service (classification)
+- master
+- appointment-specific duration
+
+**Scenarios**
+- Create appointment
+- Update / reschedule appointment
+- Cancel appointment
+
+**Notes**
+- Appointments are created only after agreement with the master
+- Appointment price is not defined at this stage
 
 ---
 
-### UC-04. Update Appointment
+### UC-04. Record Payment / Expense
 
-**Primary Actor**: Administrator  
-**Goal**: Modify appointment details
+**Primary Actor:** Administrator  
+**Goal:** Record financial outcome of operations
 
 **Brief Description**  
-The administrator updates appointment date, time, master, or duration
-based on changes agreed with the master.
+The administrator records income or expense operations.
+Income records include the final agreed price and may be linked
+to a completed appointment.
+
+**Postconditions**
+- When a payment is recorded and linked to an appointment,
+  the appointment status is automatically set to **Completed**
 
 ---
 
-### UC-05. Complete Appointment
+### UC-05. View Reports
 
-**Primary Actor**: Administrator  
-**Goal**: Mark appointment as completed
-
-**Brief Description**  
-The appointment is marked as completed and becomes eligible for
-financial recording.
-
----
-
-### UC-06. Record Financial Operation
-
-**Primary Actor**: Administrator  
-**Goal**: Record income or expense
-
-**Brief Description**  
-The administrator records a financial operation with the final agreed
-price and links it to a completed appointment where applicable.
-
----
-
-### UC-07. View Reports
-
-**Primary Actor**: Owner  
-**Goal**: Review business performance
+**Primary Actor:** Owner  
+**Goal:** Review business performance
 
 **Brief Description**  
 The owner views read-only reports and summaries generated from
@@ -196,55 +164,37 @@ operational and financial data.
 
 ---
 
-### UC-08. View Schedule
+### UC-06. View Schedule
 
-**Primary Actor**: Master  
-**Goal**: Review personal schedule
+**Primary Actor:** Master  
+**Goal:** Review personal schedule
 
 **Brief Description**  
 The master views scheduled appointments without editing capabilities.
+Schedule data is provided for informational purposes only.
 
 ---
 
-### UC-09. Synchronize Calendar Event
+### UC-07. Synchronize Calendar Event
 
-**Primary Actor**: External Calendar  
-**Goal**: Display appointment data externally
+**Primary Actor:** External Calendar  
+**Goal:** Display appointment schedule externally
 
 **Brief Description**  
-The system creates, updates, or removes calendar events based on
+The system creates, updates, or deletes calendar events based on
 appointment lifecycle changes.
 
----
-
-### UC-10. Manage Access and Roles
-
-**Primary Actor**: Owner  
-**Goal**: Control system access
-
-**Brief Description**  
-The owner manages role-based access rules and data visibility.
-
----
-
-### UC-11. Maintain System Configuration
-
-**Primary Actor**: Analyst / Maintainer  
-**Goal**: Safely evolve system configuration
-
-**Brief Description**  
-The analyst maintains business rules, validation logic, and configuration
-without affecting operational stability.
+**Notes**
+- Synchronization is one-way: system → calendar
+- Calendar data is derived and not authoritative
 
 ---
 
 ## Use Case Relationships (Conceptual)
 
-- UC-03 Create Appointment → UC-09 Synchronize Calendar Event
-- UC-05 Complete Appointment → UC-06 Record Financial Operation
-- UC-06 Record Financial Operation → UC-07 View Reports
-
-These relationships will be elaborated in BPMN and sequence diagrams.
+- UC-03 Manage Appointments → UC-07 Synchronize Calendar Event
+- UC-04 Record Payment → automatic appointment completion
+- UC-03 and UC-04 provide data for UC-05 View Reports
 
 ---
 
@@ -254,13 +204,21 @@ This use case model is traceable to:
 - High-Level Requirements Backlog (`09_Requirements_Backlog_HL.md`)
 - Personas and User Goals (`08_Personas_and_User_Goals.md`)
 - Scope definition (`06_Scope.md`)
+- Domain Decomposition (`05_Domain_Decomposition.md`)
+
+---
+
+## Design Notes
+
+- The model intentionally avoids technical configuration use cases
+- Business flows are preferred over CRUD-level granularity
+- Automation is represented as system behavior, not user actions
 
 ---
 
 ## Next Steps
 
-This document will serve as a basis for:
+This model serves as a foundation for:
 - detailed use case specifications
 - BPMN process modeling
 - functional requirements definition
-- data model refinement

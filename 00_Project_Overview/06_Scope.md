@@ -83,6 +83,16 @@ The following capabilities are included in the ISBUSHKA system.
 
 ---
 
+### External Calendar Sync (One-Way)
+
+- One-way creation of Google Calendar events based on appointment data
+- Source of truth remains the system data (Google Sheets / AppSheet)
+- Calendar is used as a convenience view for schedule consumption
+
+> The integration is one-directional: system → calendar.
+
+---
+
 ## Out of Scope
 
 The following capabilities are explicitly excluded from the current project scope.
@@ -120,7 +130,8 @@ Price is agreed manually and recorded only at payment creation.
 ### External Integrations
 - No payment gateway integrations
 - No accounting system integrations
-- No external calendar synchronization
+- No two-way calendar synchronization (Calendar → system)
+- No conflict resolution logic between calendar and system data
 
 ---
 
@@ -128,4 +139,56 @@ Price is agreed manually and recorded only at payment creation.
 
 - The system is designed for a **single salon**
 - The system supports a **small operational team**
-- Data is
+- Data is managed internally without third-party automation
+- Historical data volume is expected to remain moderate
+- Google Calendar events are derived data and do not change source records
+
+---
+
+## MVP Scope
+
+The MVP (Minimum Viable Product) includes:
+- core appointment tracking
+- manual financial recording
+- basic reporting
+- role-based access
+
+All advanced features are intentionally deferred.
+
+---
+
+## Out-of-Scope Change Handling
+
+Any request to include functionality listed as Out of Scope
+must be treated as a **change request** and evaluated for:
+- business value
+- impact on assumptions and constraints
+- effect on system complexity
+
+---
+
+## Acceptance Criteria for Scope
+
+The scope is considered successfully delivered when:
+- all In Scope capabilities are implemented and documented
+- all Out of Scope items are explicitly excluded
+- business objectives can be evaluated using system data
+- no implicit functionality is assumed by stakeholders
+
+---
+
+## Traceability
+
+This scope document is traceable to:
+- Business Objectives (`01_Business_Objectives.md`)
+- Problem Statement (`02_Problem_Statement_AsIs.md`)
+- Domain Decomposition (`05_Domain_Decomposition.md`)
+- Assumptions and Constraints (`04_Assumptions_Constraints_Dependencies.md`)
+
+---
+
+## Approval Status
+
+This scope represents the agreed boundaries of the ISBUSHKA project
+at the current discovery stage and serves as a baseline for
+subsequent design and implementation activities.

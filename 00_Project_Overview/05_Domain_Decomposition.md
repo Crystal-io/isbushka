@@ -215,6 +215,7 @@ The following domain events occur within the system:
 - Appointment completed
 - Financial operation recorded
 - Report generated
+- “Appointment scheduled” may trigger “Calendar event created”
 
 These events are used to reason about system behavior and data changes.
 

@@ -65,5 +65,5 @@ See folders `00_` – `06_` for detailed documentation.
 ---
 
 ## Author
-Mykhailo Kuvshynov
-Business & System Analysis case study created as a pet-project.
+- BSA - Mykhailo Kuvshynov
+- Business & System Analysis case study created as a pet-project.

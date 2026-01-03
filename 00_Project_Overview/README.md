@@ -7,3 +7,4 @@ vision, goals, scope, and key assumptions.
 
 - Vision.md — project background, problem statement, and success criteria
 
+

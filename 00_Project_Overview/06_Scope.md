@@ -192,3 +192,5 @@ This scope document is traceable to:
 This scope represents the agreed boundaries of the ISBUSHKA project
 at the current discovery stage and serves as a baseline for
 subsequent design and implementation activities.
+
+

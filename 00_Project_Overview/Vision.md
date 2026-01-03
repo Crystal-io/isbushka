@@ -36,3 +36,4 @@ A lightweight salon management system that:
 - Clear financial visibility
 - Easy onboarding for non-technical users
 - Structured documentation enabling further scaling
+

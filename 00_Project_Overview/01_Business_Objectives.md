@@ -1,6 +1,6 @@
 # 01. Business Objectives
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This document defines the business objectives of the ISBUSHKA project.
 The objectives describe *why* the system is being created, *what business

@@ -1,6 +1,6 @@
 # 03. Stakeholders and Actors
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This document identifies all key stakeholders and system actors involved
 in the ISBUSHKA project. It describes their roles, goals, responsibilities,

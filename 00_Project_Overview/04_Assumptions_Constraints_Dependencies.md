@@ -1,6 +1,6 @@
 # 04. Assumptions, Constraints, and Dependencies
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This document captures key assumptions, constraints, and dependencies
 identified during the discovery phase of the ISBUSHKA project.

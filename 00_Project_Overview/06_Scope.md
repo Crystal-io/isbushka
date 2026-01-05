@@ -1,6 +1,6 @@
 # 06. Project Scope
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This document defines the scope of the ISBUSHKA project.
 It clearly outlines what is included in the system (**In Scope**),

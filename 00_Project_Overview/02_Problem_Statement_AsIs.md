@@ -1,6 +1,6 @@
 # 02. Problem Statement (As-Is)
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This document describes the current state of salon operations (**As-Is**),
 key problems observed in day-to-day activities, their root causes, and

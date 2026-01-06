@@ -6,7 +6,7 @@ ISBUSHKA is a small service business (beauty salon) that requires a simple,
 transparent, and reliable system for managing daily operations.
 
 The initial solution is implemented using a no-code platform, but the focus
-of this project is not tooling — it is system design and documentation.
+of this project is not tooling — it is system design and documentation.  
 
 ---
 

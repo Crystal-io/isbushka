@@ -3,7 +3,7 @@
 ## Purpose
 This document identifies key project and operational risks along with
 mitigation approaches.
-
+  
 ## Identified Risks
 
 | Risk | Description | Mitigation |

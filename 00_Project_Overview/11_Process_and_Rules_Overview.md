@@ -4,7 +4,7 @@
 This document provides a high-level overview of key business processes
 and cross-cutting business rules before detailed BPMN modeling.
 
-## Key Process Areas
+## Key Process Areas 
 - Client lifecycle
 - Appointment lifecycle
 - Financial operations lifecycle

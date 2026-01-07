@@ -1,6 +1,6 @@
 # 05. Domain Decomposition
 
-## Purpose of This Document 
+## Purpose of This Document
 
 This document provides a high-level logical decomposition of the ISBUSHKA
 business domain. It identifies core domain areas, key business concepts,

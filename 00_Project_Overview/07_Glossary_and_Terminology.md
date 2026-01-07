@@ -1,6 +1,6 @@
 # 07. Glossary and Terminology
 
-## Purpose of This Document
+## Purpose of This Document 
 
 This glossary defines key terms used throughout the ISBUSHKA project.
 Its purpose is to ensure a shared understanding between business stakeholders,

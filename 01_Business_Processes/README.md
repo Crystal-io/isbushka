@@ -1,6 +1,6 @@
 ## Appointment Lifecycle (To-Be)
 
-![Appointment Lifecycle BPMN](../assets/bpmn/Appointment_Lifecycle_ToBe_L1.png)
+![Appointment Lifecycle BPMN](../assets/bpmn/Appointment_Lifecycle_ToBe_L1.svg)
 
 **Description:**  
 High-level BPMN To-Be process describing appointment creation, update,

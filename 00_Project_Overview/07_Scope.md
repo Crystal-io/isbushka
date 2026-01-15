@@ -1,4 +1,4 @@
-# 06. Project Scope
+# 07. Project Scope
 
 ## Purpose of This Document
 

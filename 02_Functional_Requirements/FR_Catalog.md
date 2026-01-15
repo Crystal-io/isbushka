@@ -3,8 +3,7 @@
 
 ## Purpose
 This document defines functional requirements for the ISBUSHKA system and explicitly separates
-**MVP (Release 1)** scope from **Post-MVP (Future Releases)** scope.
-This version fixes logical inconsistencies identified during FR review.
+**MVP (Release 1)** scope from **Post-MVP (R2)** scope.
 
 Legend:
 - **MVP** – mandatory for first production release

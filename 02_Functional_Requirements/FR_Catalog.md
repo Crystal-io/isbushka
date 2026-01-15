@@ -21,7 +21,7 @@ Legend:
 | FR-01.2 | Update client | System shall allow the administrator to update client profile information. | UC-01, Discovery | MVP |
 | FR-01.3 | Unique client identity | System shall uniquely identify each client within the system. | Discovery | MVP |
 | FR-01.4 | Archive client | System shall allow the administrator to archive (soft-delete) a client. | UC-01 | R2 |
-| FR-01.5 | Restrict archived clients | System shall prevent creating new appointments for archived clients. | UC-03, BPMN Appointment L2 | MVP |
+| FR-01.5 | Restrict archived clients | System shall prevent creating new appointments for archived clients. | UC-03, BPMN Appointment L2 | R2 |
 
 ---
 

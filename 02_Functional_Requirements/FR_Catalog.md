@@ -1,142 +1,101 @@
-# Functional Requirements Catalog
+
+# Functional Requirements Catalog (FR)
+## MVP vs Future Versions
 
 ## Purpose
+This document defines functional requirements for the ISBUSHKA system and explicitly separates
+**MVP (Release 1)** scope from **Post-MVP (Future Releases)** scope.
 
-This document contains atomic functional requirements describing
-**what** the ISBUSHKA system shall do.
-
-Functional requirements are:
-- implementation-independent
-- testable
-- derived from use cases and business rules
-
----
-
-## Notation
-
-- FR — Functional Requirement
-- UC — Use Case
+Legend:
+- **MVP** – mandatory for first production release
+- **R2** – next iteration after MVP
+- **Future** – backlog / nice-to-have
 
 ---
 
 ## FR-01 Client Management
 
-### FR-01.1
-System shall allow the administrator to create a client profile.
-
-### FR-01.2
-System shall allow the administrator to update client profile information.
-
-### FR-01.3
-System shall uniquely identify each client within the system.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-01.1 | Create client profile | MVP |
+| FR-01.2 | Update client profile | MVP |
+| FR-01.3 | Unique client identity | MVP |
+| FR-01.4 | Archive (soft-delete) client | R2 |
+| FR-01.5 | Prevent new appointments for archived clients | MVP |
 
 ---
 
 ## FR-02 Service Classification
 
-### FR-02.1
-System shall allow the administrator to maintain a list of service classifications.
-
-### FR-02.2
-System shall allow service classifications to be used for appointment categorization.
-
-### FR-02.3
-Service classifications shall not define price or duration.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-02.1 | Maintain service classification list | MVP |
+| FR-02.2 | Assign service classification to appointment | MVP |
+| FR-02.3 | Service classification has no price or duration | MVP |
 
 ---
 
 ## FR-03 Appointment Management
 
-### FR-03.1
-System shall allow the administrator to create an appointment **from a client context**.
-
-### FR-03.2
-System shall automatically associate a newly created appointment
-with the selected client.
-
-### FR-03.3
-System shall allow the administrator to assign a service classification to an appointment.
-
-### FR-03.4
-System shall allow the administrator to assign a master to an appointment.
-
-### FR-03.5
-System shall allow the administrator to specify appointment date and time.
-
-### FR-03.6
-System shall allow the administrator to specify appointment-specific duration.
-
-### FR-03.7
-System shall allow the administrator to update appointment details.
-
-### FR-03.8
-System shall allow the administrator to cancel an appointment.
-
-### FR-03.9
-System shall prevent cancelled appointments from being completed or paid.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-03.1 | Create appointment from client context | MVP |
+| FR-03.2 | Auto-link appointment to client | MVP |
+| FR-03.3 | Assign service classification | MVP |
+| FR-03.4 | Assign master | MVP |
+| FR-03.5 | Set appointment date and time | MVP |
+| FR-03.6 | Set appointment-specific duration | MVP |
+| FR-03.7 | Update appointment (Planned only) | MVP |
+| FR-03.8 | Cancel appointment (Planned only) | MVP |
+| FR-03.9 | Prevent payment/completion for cancelled appointment | MVP |
+| FR-03.10 | Prevent modification of completed appointment | MVP |
+| FR-03.11 | Appointment statuses (Planned/Completed/Cancelled) | MVP |
 
 ---
 
 ## FR-04 Financial Operations
 
-### FR-04.1
-System shall allow the administrator to record income operations.
-
-### FR-04.2
-System shall allow the administrator to record expense operations.
-
-### FR-04.3
-System shall allow financial operations to exist without association
-to a client or appointment.
-
-### FR-04.4
-System shall allow the administrator to optionally associate
-a financial operation with a client.
-
-### FR-04.5
-System shall allow the administrator to optionally associate
-a financial operation with an appointment.
-
-### FR-04.6
-System shall automatically set appointment status to **Completed**
-when an income operation associated with that appointment is recorded.
-
-### FR-04.7
-System shall treat recorded income operations as the source of truth
-for appointment pricing.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-04.1 | Record income operation | MVP |
+| FR-04.2 | Record expense operation | MVP |
+| FR-04.3 | Standalone payments without client/appointment | MVP |
+| FR-04.4 | Optional payment–client link | MVP |
+| FR-04.5 | Optional payment–appointment link | MVP |
+| FR-04.6 | Update payment | R2 |
+| FR-04.7 | Soft-delete payment | R2 |
+| FR-04.8 | Auto-complete appointment on linked income | MVP |
+| FR-04.9 | Income as pricing source of truth | MVP |
+| FR-04.10 | Expense does not affect appointment status | MVP |
+| FR-04.11 | Recalculate appointment financial state | R2 |
 
 ---
 
 ## FR-05 Reporting
 
-### FR-05.1
-System shall provide read-only financial summary reports.
-
-### FR-05.2
-System shall calculate financial reports based on recorded financial operations.
-
-### FR-05.3
-System shall allow reports to be filtered by time period.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-05.1 | Financial summary reports | R2 |
+| FR-05.2 | Reports based on financial operations | MVP |
+| FR-05.3 | Filter reports by time period | R2 |
 
 ---
 
 ## FR-06 Calendar Synchronization
 
-### FR-06.1
-System shall create calendar events for planned appointments.
-
-### FR-06.2
-System shall update calendar events when appointment details change.
-
-### FR-06.3
-System shall update or remove calendar events when appointments are cancelled.
-
-### FR-06.4
-Calendar synchronization shall be one-way from the system to the external calendar.
+| ID | Requirement | Release |
+|----|------------|---------|
+| FR-06.1 | Create calendar event on appointment creation | MVP |
+| FR-06.2 | Update calendar event on appointment update | MVP |
+| FR-06.3 | Update/remove calendar event on cancellation | MVP |
+| FR-06.4 | One-way calendar sync | MVP |
+| FR-06.5 | Store sync status | R2 |
+| FR-06.6 | Retry calendar sync on failure | R2 |
 
 ---
 
-## Notes
+## Summary
 
-- Validation rules and user interaction flows are defined in detailed use case specifications.
-- Process sequencing is defined in BPMN diagrams.
+- **MVP focus:** core operations (clients, appointments, payments, calendar sync)
+- **R2 focus:** edit/delete flows, reporting enhancements, resiliency
+- **Future:** advanced analytics, role expansion, configuration UI

@@ -75,7 +75,7 @@ Legend:
 
 | ID | Requirement | Description | Source | Release |
 |----|------------|-------------|--------|---------|
-| FR-05.1 | Financial summary reports | System shall provide financial summary reports. | Discovery | R2 |
+| FR-05.1 | Financial summary reports | System shall provide financial summary reports. | Discovery | MVP |
 | FR-05.2 | Calculate reports | System shall calculate reports based on recorded financial operations. | Discovery | MVP |
 | FR-05.3 | Filter reports | System shall allow filtering reports by time period. | Discovery | R2 |
 

@@ -29,7 +29,7 @@ Legend:
 
 | ID | Requirement | Description | Source | Release |
 |----|------------|-------------|--------|---------|
-| FR-02.1 | Manage service classifications | System shall allow the administrator to maintain a list of service classifications. | UC-02, Discovery | MVP |
+| FR-02.1 | Manage service classifications | System shall allow the administrator to maintain a list of service classifications. | UC-02, Discovery | R2 |
 | FR-02.2 | Assign service classification | System shall allow service classifications to be used for appointment categorization. | UC-03 | MVP |
 | FR-02.3 | No price/duration in classification | Service classifications shall not define price or duration. | Discovery (Business Rule) | MVP |
 

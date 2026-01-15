@@ -46,8 +46,8 @@ Legend:
 | FR-03.5 | Set date and time | System shall allow the administrator to specify appointment date and time. | UC-03 | MVP |
 | FR-03.6 | Set duration | System shall allow the administrator to specify appointment-specific duration. | UC-03 | MVP |
 | FR-03.7 | Update planned appointment | System shall allow appointment updates only when status is Planned. | BPMN Appointment L2 | MVP |
-| FR-03.8 | Cancel planned appointment | System shall allow appointment cancellation only when status is Planned. | BPMN Appointment L2 | MVP |
-| FR-03.9 | Block cancelled appointment actions | System shall prevent payment or completion of cancelled appointments. | BPMN Appointment L2 | MVP |
+| FR-03.8 | Cancel planned appointment | System shall allow appointment cancellation only when status is Planned. | BPMN Appointment L2 | R2 |
+| FR-03.9 | Block cancelled appointment actions | System shall prevent payment or completion of cancelled appointments. | BPMN Appointment L2 | R2 |
 | FR-03.10 | Lock completed appointment | System shall prevent modification or cancellation of completed appointments. | BPMN Appointment L2 | MVP |
 | FR-03.11 | Appointment status model | System shall support appointment statuses: Planned, Completed, Cancelled. | BPMN Appointment L2 | MVP |
 

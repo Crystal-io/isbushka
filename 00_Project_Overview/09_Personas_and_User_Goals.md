@@ -1,4 +1,4 @@
-# 08. Personas and User Goals
+# 09. Personas and User Goals
 
 ## Purpose of This Document
 

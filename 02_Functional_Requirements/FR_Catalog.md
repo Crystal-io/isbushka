@@ -1,6 +1,5 @@
 
 # Functional Requirements Catalog (FR)
-## MVP vs Post-MVP Scope (Corrected Version)
 
 ## Purpose
 This document defines functional requirements for the ISBUSHKA system and explicitly separates

@@ -1,4 +1,4 @@
-# 12. Out of Scope and Future Considerations
+# 13. Out of Scope and Future Considerations
 
 ## Purpose
 This document defines explicitly excluded functionality and potential

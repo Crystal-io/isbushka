@@ -1,4 +1,4 @@
-# 07. Glossary and Terminology
+# 08. Glossary and Terminology
 
 ## Purpose of This Document 
 

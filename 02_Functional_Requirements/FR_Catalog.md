@@ -77,8 +77,8 @@ Legend:
 |----|------------|-------------|--------|---------|
 | FR-05.1 | Financial summary reports | System shall provide financial summary reports. | Discovery | MVP |
 | FR-05.2 | Calculate reports | System shall calculate reports based on recorded financial operations. | Discovery | MVP |
-| FR-04.3 | Recalculate financial state | System shall recalculate appointment financial state when linked income is updated or removed. | BPMN Payment L1 | R2 |
-| FR-05.3 | Filter reports | System shall allow filtering reports by time period. | Discovery | R2 |
+| FR-05.3 | Recalculate financial state | System shall recalculate appointment financial state when linked income is updated or removed. | BPMN Payment L1 | R2 |
+| FR-05.4 | Filter reports | System shall allow filtering reports by time period. | Discovery | R2 |
 
 ---
 
